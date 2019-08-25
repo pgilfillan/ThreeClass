@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float speed;
     public Sprite warriorSprite;
     public Sprite archerSprite;
     public Sprite mageSprite;
+
+    public int health;
+
+    private enum ClassState
+    {
+        Warrior,
+        Archer,
+        Mage
+    }
 
     private ClassState currClassState = ClassState.Warrior;
 
@@ -64,10 +73,13 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private enum ClassState
+    public void receiveDamage(int receivedDamage)
     {
-        Warrior,
-        Archer,
-        Mage
+        health = Mathf.Max(health - receivedDamage, 0);
+
+        if (health == 0)
+        {
+            Debug.Log("Player died");
+        }
     }
 }
