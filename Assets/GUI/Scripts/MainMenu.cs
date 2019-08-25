@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
 	public void OnPlayButtonClicked()
     {
-    	Application.LoadLevel("CombatTest");
+        SceneManager.LoadScene("CombatTest");
     }
 
 	public void OnOptionButtonClicked()
