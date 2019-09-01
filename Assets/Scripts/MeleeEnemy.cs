@@ -21,7 +21,7 @@ public class MeleeEnemy : MonoBehaviour
         }
     }
 
-    public void receiveDamage(int receivedDamage)
+    public void ReceiveDamage(int receivedDamage)
     {
         health = Mathf.Max(health - receivedDamage, 0);
 

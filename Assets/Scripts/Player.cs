@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public Sprite warriorSprite;
     public Sprite archerSprite;
     public Sprite mageSprite;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     public int health;
 
@@ -20,25 +22,58 @@ public class Player : MonoBehaviour
 
     private ClassState currClassState = ClassState.Warrior;
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         transform.Translate(horizontal, vertical, 0);
 
+        if (Mathf.Abs(horizontal) < 0.001)
+        {
+            animator.SetInteger("SpeedX", 0);
+        }
+        else if (horizontal > 0)
+        {
+            animator.SetInteger("SpeedX", 1);
+        }
+        else
+        {
+            animator.SetInteger("SpeedX", -1);
+        }
+
+        if (Mathf.Abs(vertical) < 0.001)
+        {
+            animator.SetInteger("SpeedY", 0);
+        }
+        else if (vertical > 0)
+        {
+            animator.SetInteger("SpeedY", 1);
+        }
+        else
+        {
+            animator.SetInteger("SpeedY", -1);
+        }
+
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            GetComponent<SpriteRenderer>().sprite = warriorSprite;
+            spriteRenderer.sprite = warriorSprite;
             currClassState = ClassState.Warrior;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            GetComponent<SpriteRenderer>().sprite = archerSprite;
+            spriteRenderer.sprite = archerSprite;
             currClassState = ClassState.Archer;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            GetComponent<SpriteRenderer>().sprite = mageSprite;
+            spriteRenderer.sprite = mageSprite;
             currClassState = ClassState.Mage;
         }
         else if (Input.GetMouseButtonDown(0))
@@ -73,7 +108,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void receiveDamage(int receivedDamage)
+    public void ReceiveDamage(int receivedDamage)
     {
         health = Mathf.Max(health - receivedDamage, 0);
 

@@ -1,0 +1,13 @@
+Fix walking sprite animation
+Add attack animation (all sides)
+Add arrow projectile
+Add sword attack hit (<180 range around player?)
+Add arrow attack hit (collision)
+Add magic attack hit (360 range around point?)
+Get sounds:
+    - walk
+    - swing
+    - shoot
+    - magic
+Sprite collision with tree
+Enemy knockback- visually responsive damage
